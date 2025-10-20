@@ -1,0 +1,102 @@
+🎬 EvalPolicy – 4-Minute Team Pitch (English Version)
+
+(3 people – time-coordinated script)
+
+🧍‍♀️ [Person 1 — 0:00 – 1:00] — INTRO & PROBLEM
+
+🎙️ (Warm, confident tone)
+
+Every year, hundreds of new laws and social programs are proposed in Colombia —
+but very few are evaluated with real data before they’re approved.
+
+Many decisions are made with good intentions, but without evidence.
+And that means millions invested… without knowing if we’re actually solving the problem.
+
+We believe artificial intelligence can change that.
+
+That’s why we created EvalPolicy — an AI agent that analyzes public policies before they’re implemented,
+helping governments make decisions based on data, not intuition.
+
+📺 (Slide shows the quote: “Govern with data, not assumptions.”)
+
+🧍‍♂️ [Person 2 — 1:00 – 1:40] — SOLUTION
+
+🎙️ (Technical but friendly tone)
+
+EvalPolicy lets you either type or upload a document describing a policy.
+
+In just seconds, it analyzes the content and produces a report showing benefits, risks, costs, and a general conclusion.
+
+It uses a cutting-edge model — Llama 3.1 running on Groq — combined with a contextual knowledge base that adds real historical data.
+
+💻 (Show the main interface or start the short demo video silently while speaking.)
+
+⚙️ [DEMO — 1:40 – 2:30]
+
+👩‍💻 [Person 2 – narrating while the demo plays]
+
+Let’s try a quick example.
+Here we upload a document about transportation subsidies for rural students.
+
+EvalPolicy reads the text and automatically detects the key variable: rural education.
+
+👨‍💻 [Person 3 – continues as results appear]
+
+The AI then generates a structured report:
+Benefits: improved school attendance.
+Risks: higher government spending.
+Costs: moderate budget increase.
+Conclusion: positive policy if paired with fiscal monitoring.
+
+📈 (The screen shows the final report layout — no need to scroll or code.)
+
+🧍‍♂️ [Person 2 — 2:30 – 3:00] — HOW IT WORKS
+
+🎙️ (Clear, concise tone)
+
+Behind that analysis there are three layers of intelligence:
+
+LLM: interprets the policy text and produces the main evaluation.
+
+MCP: provides real contextual data from previous programs.
+
+A2A: enables two AI agents to collaborate — one interprets, the other validates.
+
+All results are stored in Supabase and can be retrieved or compared later.
+
+🧍‍♀️ [Person 3 — 3:00 – 3:40] — IMPACT & VISION
+
+🎙️ (Inspirational tone)
+
+EvalPolicy doesn’t just analyze — it simulates scenarios.
+
+It can show how dropout rates might change if transportation subsidies increase by 10 % or 20 %.
+
+This tool empowers governments, researchers, and citizens to understand policy impact before acting.
+
+It’s built with FastAPI and React, deployed on Render and Vercel, and ready to scale for real-world decisions.
+
+More than technology, EvalPolicy represents a new way to govern with evidence, not assumptions.
+
+💬 [ALL — 3:40 – 4:00] — GROUP CLOSING
+
+(Alternate short phrases, smiling and confident)
+
+👩‍💻 “We are [team name].”
+👨‍💻 “We believe AI should never replace human decisions…”
+👩‍💻 “…but it can definitely make them smarter.”
+
+💚 This is EvalPolicy — data-driven decisions for a better future.
+
+🎬 (Final slide: logo + tagline “Powered by AI for social impact.”)
+
+🧠 Rehearsal tips
+
+Keep each segment under its minute: 1:00 / 0:40 / 0:50 / 0:30 / 0:40 / 0:20.
+
+Play a 30–45 sec muted demo video while Person 2 narrates.
+
+Person 1 = Storytelling; Person 2 = Tech & demo; Person 3 = Vision & closing.
+
+Use 5 slides total:
+1️⃣ Problem 2️⃣ Solution 3️⃣ Demo 4️⃣ Architecture (LLM + MCP + A2A) 5️⃣ Impact & Closing.
