@@ -1,0 +1,607 @@
+prompt v0:
+
+Crea una aplicación completa de análisis de políticas públicas llamada EvalPolicy basada en estos wireframes específicos:
+
+=== ESTRUCTURA GENERAL ===
+
+LAYOUT PRINCIPAL:
+- Sidebar izquierda fija (240px) con:
+  * Logo "EvalPolicy" en la parte superior
+  * Menú de navegación vertical:
+    - Dashboard (icono: BarChart3)
+    - Nueva Evaluación (icono: Plus)
+    - Políticas (icono: FileText)
+    - Comparar (icono: GitCompare)
+    - Recomendaciones (icono: Lightbulb)
+  * Footer con Settings (icono: Settings)
+  * Botón de colapsar sidebar (icono: ChevronLeft)
+
+- Header superior sticky con:
+  * Breadcrumb de navegación
+  * Barra de búsqueda global con icono de lupa
+  * Icono de notificaciones con badge numérico
+  * Avatar de usuario con dropdown
+
+- Área de contenido principal con padding de 32px
+
+=== PÁGINA 1: DASHBOARD ===
+
+SECCIÓN SUPERIOR - KPI CARDS (Grid 4 columnas):
+Card 1:
+- Icono: FileText (azul)
+- Label: "Políticas Analizadas"
+- Valor grande: "47"
+- Subtext: "+12% vs mes anterior"
+
+Card 2:
+- Icono: TrendingUp (verde)
+- Label: "Score Promedio"
+- Valor grande: "7.2/10"
+- Progress bar azul al 72%
+
+Card 3:
+- Icono: AlertTriangle (naranja)
+- Label: "En Riesgo Alto"
+- Valor grande: "8"
+- Badge rojo: "Requiere atención"
+
+Card 4:
+- Icono: Bell (rojo)
+- Label: "Alertas Activas"
+- Valor grande: "12"
+- Link: "Ver todas"
+
+SECCIÓN MEDIA - GRÁFICO:
+- Card blanca con título "Análisis por Categoría (últimos 30 días)"
+- Gráfico de barras horizontales con:
+  * Salud: 12 políticas (barra azul)
+  * Educación: 15 políticas (barra verde)
+  * Transporte: 8 políticas (barra amarilla)
+  * Economía: 7 políticas (barra naranja)
+  * Ambiente: 5 políticas (barra roja)
+- Mostrar número al final de cada barra
+
+SECCIÓN INFERIOR - CONTROLES:
+- Flex row con:
+  * Input de búsqueda (placeholder: "Buscar políticas...")
+  * Select de categorías (opciones: Todas, Salud, Educación, Transporte, Economía, Ambiente)
+  * Select de ordenamiento (opciones: Más recientes, Mayor score, Menor score)
+
+GRID DE POLÍTICAS (2 columnas):
+Cada tarjeta de política debe tener:
+- Badge de categoría (top-left, pequeño, coloreado según categoría)
+- Título de política (font-semibold, 18px, max 2 líneas con ellipsis)
+- Descripción corta (text-gray-600, 14px, max 3 líneas con ellipsis)
+- Score circular (top-right, 60px diámetro):
+  * Número grande dentro (24px)
+  * Color de borde según score:
+    - Verde (#10B981) si ≥ 8
+    - Amarillo (#F59E0B) si ≥ 6
+    - Naranja (#F97316) si ≥ 4
+    - Rojo (#EF4444) si < 4
+  * Grosor de borde: 4px
+
+- Sección de iconos (3 filas, icon + texto):
+  * TrendingUp (verde) + texto de beneficios (1 línea, ellipsis)
+  * Shield (rojo) + texto de riesgos (1 línea, ellipsis)
+  * DollarSign (azul) + texto de costos (1 línea, ellipsis)
+
+- Footer con:
+  * Badge de status (left):
+    - "ALTA VIABILIDAD" (verde) si score ≥ 8
+    - "VIABLE CON AJUSTES" (amarillo) si score ≥ 6
+    - "REQUIERE REVISIÓN" (naranja) si score ≥ 4
+    - "NO RECOMENDADA" (rojo) si < 4
+  * Fecha (right, text-gray-500, pequeña)
+  * Badge de alertas si > 0 (naranja con número)
+
+- Hover effect: shadow-xl y ligero scale(1.02)
+- Click: navegar a detalle de política
+
+=== PÁGINA 2: NUEVA EVALUACIÓN ===
+
+Breadcrumb: "Dashboard > Nueva Evaluación"
+
+LAYOUT DE 2 COLUMNAS (60/40):
+
+COLUMNA IZQUIERDA:
+- Input de título:
+  * Label: "Título de la Política"
+  * Placeholder: "Ej: Subsidio de Transporte Juvenil Medellín"
+  * Requerido (asterisco rojo)
+
+- Textarea grande:
+  * Label: "Descripción Completa"
+  * Placeholder: "Describe la política o pega el texto completo aquí..."
+  * Min height: 300px
+  * Character counter: "0 / 10000"
+  * Requerido
+
+- Zona de upload:
+  * Borde discontinuo (dashed)
+  * Icono de nube (CloudUpload, grande, centrado)
+  * Texto: "Arrastra archivos PDF/DOCX aquí"
+  * Subtexto: "o haz clic para seleccionar (máx 10MB)"
+  * Background hover: bg-blue-50
+  * Mostrar lista de archivos subidos con icono de X para eliminar
+
+COLUMNA DERECHA:
+
+Card 1 - "Parámetros de Simulación" (opcional):
+- Toggle switch: "Activar simulación"
+- Cuando está activo, mostrar:
+  * Slider: "Población objetivo" (0 - 1,000,000)
+    - Valor actual debajo del slider
+  * Slider: "Presupuesto (COP millones)" (0 - 10,000)
+    - Valor actual formateado: "COP 5,000M"
+  * Select: "Categoría"
+    - Opciones: Salud, Educación, Transporte, Economía, Ambiente, Otro
+
+Card 2 - "Contexto Histórico":
+- Toggle: "Consultar MCP para casos similares"
+  * Helper text: "Busca políticas históricas relacionadas"
+- Toggle: "Habilitar análisis comparativo"
+  * Helper text: "Compara con políticas exitosas pasadas"
+
+Card 3 - "Vista Previa de Análisis":
+- Placeholder con texto: "Los resultados aparecerán aquí..."
+- Icono de documento con lupa
+
+BOTONES INFERIORES (full-width en columna izquierda):
+- Botón primario grande: "Analizar Política" (azul, con icono Zap)
+- Botón secundario: "Guardar como Borrador" (gris, outline)
+
+INDICADOR DE PROGRESO (inicialmente oculto):
+- Barra de progreso animada cuando se está analizando
+- Texto: "Analizando política... Esto puede tomar 15-30 segundos"
+- Pasos visibles:
+  1. "Procesando documento..." (con spinner)
+  2. "Analizando con IA..." (con spinner)
+  3. "Validando con datos históricos..." (con spinner)
+  4. "Generando resultados..." (con checkmark)
+
+=== PÁGINA 3: DETALLE DE POLÍTICA ===
+
+HEADER DE POLÍTICA:
+- Botón "← Volver" (top-left)
+- Título de política (grande, bold)
+- Flex row con:
+  * Badge de categoría
+  * Badge de fecha
+  * Score circular grande (80px)
+- Botones de acción (right):
+  * "Exportar PDF" (icono: Download)
+  * "Compartir" (icono: Share2)
+  * "Eliminar" (icono: Trash2, rojo)
+
+TABS DE NAVEGACIÓN:
+- Resumen (activo por defecto)
+- Detalles
+- Historial
+- Comparación
+
+CONTENIDO TAB "RESUMEN":
+
+Card "Resumen Ejecutivo":
+- Icono: FileText
+- Párrafo con el resumen general
+
+Card "Beneficios Identificados":
+- Border-left verde (4px)
+- Background: bg-green-50
+- Icono: TrendingUp
+- Lista de beneficios (bullets verdes)
+
+Card "Riesgos Detectados":
+- Border-left rojo (4px)
+- Background: bg-red-50
+- Icono: AlertTriangle
+- Lista de riesgos (bullets rojos)
+
+Card "Análisis de Costos":
+- Border-left azul (4px)
+- Background: bg-blue-50
+- Icono: DollarSign
+- Desglose de costos:
+  * Inversión inicial
+  * Costo operativo anual
+  * Costo total estimado
+
+Card "Conclusión y Recomendación":
+- Background: bg-gray-50
+- Icono: CheckCircle
+- Texto de conclusión
+- Badge de recomendación (APROBAR / REVISAR / RECHAZAR)
+
+Card "Validación con MCP":
+- Título con icono: Database
+- Grid de 3 métricas:
+  * Confidence Score: Progress bar circular con porcentaje
+  * Casos similares: Número grande con icono
+  * Evidencia encontrada: Badge (Sí/No)
+- Lista expandible de casos históricos similares
+
+SIDEBAR DERECHA (sticky):
+
+Widget "Alertas":
+- Lista de alertas con:
+  * Icono de alerta (color según severidad)
+  * Tipo de alerta
+  * Descripción corta
+- Badge de severidad: CRÍTICA (rojo) / ALTA (naranja) / MEDIA (amarillo)
+
+Widget "Metadata":
+- Fecha de análisis
+- Tiempo de procesamiento
+- Versión del modelo
+- ID de la evaluación
+
+Widget "Log de Comunicación A2A":
+- Acordeón expandible
+- Timeline de eventos:
+  * Timestamp
+  * Agente (Analyzer / Validator)
+  * Acción realizada
+  * Icono de status
+
+=== PÁGINA 4: COMPARACIÓN ===
+
+HEADER:
+- Título: "Comparar Políticas"
+
+SELECTORES (Top):
+- Dos Select lado a lado:
+  * "Selecciona Política 1"
+  * "Selecciona Política 2"
+- Botón: "Comparar" (centrado)
+
+LAYOUT DE COMPARACIÓN (50/50):
+
+POLÍTICA A (Izquierda):
+- Título + Score
+- Card con info resumida
+- Gráfico radar con 5 métricas:
+  * Viabilidad
+  * Impacto Social
+  * Costo-Beneficio
+  * Evidencia Histórica
+  * Urgencia
+
+POLÍTICA B (Derecha):
+- Mismo layout que Política A
+
+SECCIÓN CENTRAL - DIFERENCIAS:
+- Tabla comparativa con:
+  * Score (con flecha indicando cuál es mayor)
+  * Costos (con diferencia en %)
+  * Beneficiarios (con diferencia en números)
+  * Tiempo de implementación
+  * Nivel de riesgo
+
+RECOMENDACIÓN FINAL:
+- Card destacada con:
+  * Título: "Recomendación del Sistema"
+  * Texto explicando cuál es mejor y por qué
+  * Badge: "POLÍTICA A RECOMENDADA" o "POLÍTICA B RECOMENDADA"
+
+=== PÁGINA 5: RECOMENDACIONES ===
+
+HEADER:
+- Título: "Recomendaciones del Sistema"
+- Subtítulo: "Generadas por análisis de IA basado en 47 políticas"
+- Badge: "Actualizado hace 2 horas"
+
+GRID DE RECOMENDACIONES (1 columna, full width):
+
+Card 1 - TENDENCIA:
+- Border-left azul (4px)
+- Background: bg-blue-50
+- Icono grande: Lightbulb (4xl, amarillo)
+- Badge: "TENDENCIA" (azul)
+- Título (bold, 20px)
+- Descripción (3-4 líneas)
+- Sección "Acción Sugerida":
+  * Icono: ArrowRight
+  * Texto en bold
+
+Card 2 - ALERTA:
+- Border-left rojo (4px)
+- Background: bg-red-50
+- Icono: AlertTriangle (4xl, rojo)
+- Badge: "ALERTA" (rojo)
+- Mismo formato
+
+Card 3 - OPORTUNIDAD:
+- Border-left verde (4px)
+- Background: bg-green-50
+- Icono: Target (4xl, verde)
+- Badge: "OPORTUNIDAD" (verde)
+- Mismo formato
+
+SECCIÓN "Análisis de Brechas":
+- Card con heatmap visual
+- Grid de 5x3:
+  * Eje X: Categorías (Salud, Educación, etc.)
+  * Eje Y: Trimestres (Q1, Q2, Q3, Q4)
+  * Celdas coloreadas según cantidad de análisis:
+    - Verde oscuro: muchos análisis
+    - Verde claro: algunos
+    - Amarillo: pocos
+    - Rojo: ninguno
+
+SECCIÓN "Tendencias Temporales":
+- Line chart mostrando:
+  * Score promedio por mes (últimos 6 meses)
+  * Línea de tendencia
+  * Puntos destacados con tooltips
+
+=== SISTEMA DE DISEÑO ===
+
+COLORES:
+- Primary: #3B82F6 (blue-500)
+- Success: #10B981 (green-500)
+- Warning: #F59E0B (yellow-500)
+- Danger: #EF4444 (red-500)
+- Background: #F9FAFB (gray-50)
+- Card: #FFFFFF
+- Text primary: #111827 (gray-900)
+- Text secondary: #6B7280 (gray-500)
+
+TIPOGRAFÍA:
+- Font family: Inter
+- Headings: font-bold
+- Body: font-normal
+- Small: text-sm (14px)
+- Base: text-base (16px)
+- Large: text-lg (18px)
+- XL: text-xl (20px)
+
+ESPACIADO:
+- Card padding: p-6 (24px)
+- Section gap: gap-6 (24px)
+- Grid gap: gap-4 (16px)
+- Button padding: px-4 py-2
+
+COMPONENTES:
+- Border radius: rounded-lg (8px)
+- Card shadow: shadow-md, hover:shadow-xl
+- Transition: transition-all duration-300
+- Button height: h-10 (40px)
+- Input height: h-10
+
+ICONOS:
+- Usar Lucide React
+- Tamaño estándar: w-5 h-5 (20px)
+- Tamaño grande: w-8 h-8 (32px)
+
+ESTADOS:
+- Hover: hover:bg-gray-50 para cards
+- Active: ring-2 ring-blue-500
+- Disabled: opacity-50 cursor-not-allowed
+- Loading: animate-pulse
+
+RESPONSIVE:
+- Mobile: < 768px (stack verticalmente)
+- Tablet: 768px - 1024px (sidebar colapsado por defecto)
+- Desktop: > 1024px (layout completo)
+
+=== DATOS DE EJEMPLO ===
+
+Incluir datos mock realistas para:
+- 4 políticas de ejemplo en dashboard
+- Nombres de políticas variados
+- Scores entre 4.3 y 9.1
+- Fechas recientes (octubre 2025)
+- Categorías diversas
+- Textos de beneficios/riesgos/costos específicos de Colombia
+
+=== FUNCIONALIDAD ===
+
+- Todos los inputs deben ser controlados (useState)
+- Búsqueda debe filtrar en tiempo real
+- Selects deben actualizar la vista
+- Botones deben mostrar estados de loading
+- Tabs deben cambiar contenido sin recargar
+- Tooltips en iconos informativos
+- Modals para confirmaciones (ej: eliminar política)
+- Toast notifications para acciones exitosas/fallidas
+
+=== REQUERIMIENTOS TÉCNICOS ===
+
+- Usar TypeScript
+- Componentes funcionales con hooks
+- shadcn/ui components
+- Tailwind CSS (solo clases de utilidad estándar)
+- Lucide React para iconos
+- Recharts para gráficos
+- React Router para navegación
+- Código limpio y comentado
+- Props interfaces definidas
+- Responsive design completo
+
+IMPORTANTE: 
+- Genera código completo y funcional
+- Sin placeholders ni TODOs
+- Todos los componentes deben renderizar
+- Incluye manejo de estados y eventos
+- Simula delays en operaciones async (setTimeout)
+
+prompt stitch ai:
+
+Create a complete wireframe system for EvalPolicy, a public policy analysis platform for Colombia using AI.
+
+PROJECT OVERVIEW:
+EvalPolicy is a web application that uses LLM (Groq/Llama 3.1) + MCP (knowledge base) + Agent-to-Agent architecture to analyze and evaluate public policies, social programs, and bills. Target users: policymakers, researchers, and civil society organizations in Colombia.
+
+PAGES TO CREATE (5 screens):
+
+1. DASHBOARD (Main View)
+   - Top navigation bar with: Logo, Search bar, Notifications bell icon, User avatar
+   - Left sidebar (collapsible) with menu items:
+     * Dashboard (home icon)
+     * New Analysis (plus icon)
+     * Policies (file-text icon)
+     * Compare (git-compare icon)
+     * Recommendations (lightbulb icon)
+     * Settings (gear icon)
+   
+   - Main content area:
+     * 4 KPI cards in horizontal row:
+       - "Políticas Analizadas" with number 47
+       - "Score Promedio" with 7.2/10
+       - "En Riesgo Alto" with number 8
+       - "Alertas Activas" with number 12
+     
+     * Section: "Análisis por Categoría" (bar chart visualization):
+       - Horizontal bars for: Salud, Educación, Transporte, Economía, Ambiente
+       - Show count numbers on right
+     
+     * Section: "Políticas Recientes" (grid of cards, 2 columns):
+       Each card contains:
+       - Category badge (top left corner)
+       - Policy title (bold, 2 lines max)
+       - Short description (gray text, 2 lines)
+       - Large score number (top right, color-coded circle)
+       - 3 icon rows: Benefits (trend-up icon), Risks (alert icon), Costs (dollar icon)
+       - Footer with: Status badge + date stamp
+
+2. NEW ANALYSIS PAGE
+   - Breadcrumb: Dashboard > New Analysis
+   - Large heading: "Analizar Nueva Política"
+   
+   - Two-column layout:
+     Left column (60%):
+     - Input field: "Título de la política"
+     - Large text area: "Descripción o pega el texto completo"
+     - File upload zone: "Arrastra archivos PDF/DOCX o haz clic para seleccionar"
+       (with cloud-upload icon, dashed border)
+     
+     Right column (40%):
+     - Card: "Parámetros de Simulación" (optional)
+       * Slider: "Población objetivo" (0 - 1M)
+       * Slider: "Presupuesto (COP millones)" (0 - 10,000)
+       * Select: "Categoría" (dropdown)
+     
+     - Card: "Contexto Histórico"
+       * Toggle: "Consultar MCP para casos similares"
+       * Toggle: "Análisis comparativo"
+   
+   - Bottom: Large primary button "Analizar Política" + Secondary "Guardar borrador"
+   - Progress indicator area (initially hidden)
+
+3. POLICY DETAIL PAGE
+   - Back button to dashboard
+   - Header with:
+     * Policy title (large)
+     * Category badge + Date
+     * Large score circle (right side)
+     * Action buttons: Export PDF, Share, Delete
+   
+   - Tabs navigation: Overview, Details, History, Comparison
+   
+   - Content sections (Overview tab):
+     * "Resumen Ejecutivo" card
+     * "Beneficios Identificados" card (green accent)
+     * "Riesgos Detectados" card (red accent)
+     * "Análisis de Costos" card (blue accent)
+     * "Conclusión y Recomendación" card
+     * "Validación con MCP" card showing:
+       - Evidence score (progress bar)
+       - Similar cases found (number)
+       - Confidence level (percentage)
+   
+   - Sidebar:
+     * "Alertas" widget (if any)
+     * "Metadata" info box
+     * "A2A Communication Log" (expandable)
+
+4. COMPARISON VIEW
+   - Header: "Comparar Políticas"
+   - Top section: Two dropdown selectors to choose policies
+   
+   - Split view (50/50):
+     Left side: Policy A details
+     Right side: Policy B details
+     
+     Both sides show:
+     - Title + score
+     - Radar chart (5 metrics)
+     - Key differences table
+     - Recommendation which is better
+   
+   - Bottom: "Comparison matrix" table with side-by-side metrics
+
+5. RECOMMENDATIONS PAGE
+   - Header: "Recomendaciones del Sistema"
+   - Subheader: "Generado por análisis de IA basado en 47 políticas"
+   
+   - 3 main cards:
+     * "TENDENCIA" card (blue accent, lightbulb icon)
+       - Title
+       - Description
+       - Action recommendation
+     
+     * "ALERTA" card (red accent, alert-triangle icon)
+       - Title
+       - Description
+       - Action recommendation
+     
+     * "OPORTUNIDAD" card (green accent, target icon)
+       - Title
+       - Description
+       - Action recommendation
+   
+   - Section: "Análisis de Brechas" (heatmap visualization)
+   - Section: "Tendencias Temporales" (line chart)
+
+DESIGN SYSTEM SPECIFICATIONS:
+
+Colors:
+- Primary: Blue (#3B82F6)
+- Success: Green (#10B981)
+- Warning: Yellow (#F59E0B)
+- Danger: Red (#EF4444)
+- Background: Light gray (#F9FAFB)
+- Card background: White (#FFFFFF)
+- Text primary: Dark gray (#111827)
+- Text secondary: Medium gray (#6B7280)
+
+Typography:
+- Headings: Bold, 24-32px
+- Body: Regular, 14-16px
+- Small text: 12px
+- Font family: Inter or similar sans-serif
+
+Components:
+- Cards: White background, subtle shadow, 12px border radius
+- Buttons: 8px border radius, medium height
+- Inputs: Border with focus state, 8px radius
+- Badges: Small pills with colored backgrounds
+- Icons: 20-24px, use Lucide icon style
+
+Layout:
+- Max content width: 1280px
+- Sidebar width: 240px (expanded), 64px (collapsed)
+- Card padding: 24px
+- Grid gap: 24px
+- Responsive breakpoints: mobile (< 768px), tablet (768-1024px), desktop (> 1024px)
+
+States to include:
+- Hover states for interactive elements
+- Loading states (skeleton screens)
+- Empty states (no data yet)
+- Error states (failed to load)
+
+Annotations to add:
+- Indicate clickable areas
+- Show data types (text, number, date)
+- Mark required fields
+- Specify component interactions (hover, click, expand)
+- Note responsive behavior
+
+OUTPUT FORMAT:
+- Create as Figma frames with proper naming
+- Use Auto Layout where applicable
+- Include component variants for different states
+- Organize in pages: Desktop, Mobile, Components
+- Add cover page with design system overview
